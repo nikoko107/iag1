@@ -1,0 +1,48 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Sun Feb 11 16:38:28 2018
+
+@author: nikoko
+"""
+#chargement des librairie
+from nltk.corpus import stopwords
+from nltk.tokenize import word_tokenize
+from nltk.stem.lancaster import LancasterStemmer
+st = LancasterStemmer()
+
+#données pour le nettoyage
+ponc = [',','.',';']
+stop_words = set(stopwords.words('english'))
+
+#données d'entrée
+text = 'jolies jolis joli'
+
+#decoupage de la phrase en mots
+words = word_tokenize(text)
+
+new_sentence = []
+
+#nettoyage à partir de la liste stop worl 
+for word in words:
+    if word not in stop_words:
+        new_sentence.append(word)
+
+#nettoyage ponctuation
+new_sentence_ponc = []
+for word in words:
+    if word not in ponc:
+        new_sentence_ponc.append(word) 
+
+#simplification  racination des mots
+new_sentence_stem = []
+for word in new_sentence_ponc:
+        a = st.stem(word)
+        new_sentence_stem.append(a)
+        
+ # affichage       
+print(text)
+print(words)
+print(new_sentence)
+print(new_sentence_ponc)
+print(new_sentence_stem)
